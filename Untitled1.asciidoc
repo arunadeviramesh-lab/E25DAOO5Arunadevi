@@ -1,0 +1,35 @@
++*In[1]:*+
+[source, ipython3]
+----
+from nltk.stem import PorterStemmer
+from nltk.tokenize import word_tokenize
+
+# Simple word normalization function
+def normalize_text(text):
+    stemmer = PorterStemmer()
+    # Basic tokenization by splitting spaces
+    tokens = text.split()
+    # Stem each word
+    stems = [stemmer.stem(word) for word in tokens]
+    # Join back into string
+    return " ".join(stems)
+
+# Example
+text = "The cats were running faster than the dogs."
+print("Original:", text)
+print("Normalized:", normalize_text(text))
+----
+
+
++*Out[1]:*+
+----
+Original: The cats were running faster than the dogs.
+Normalized: the cat were run faster than the dogs.
+----
+
+
++*In[ ]:*+
+[source, ipython3]
+----
+
+----
