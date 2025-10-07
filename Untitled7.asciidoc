@@ -1,0 +1,55 @@
++*In[1]:*+
+[source, ipython3]
+----
+import sys, subprocess
+try:
+    import pandas as pd
+except ModuleNotFoundError:
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "pandas"])
+    import pandas as pd
+
+data = {
+    'Name': ['Meera', 'Anjali', 'Vikram', 'Rohit'],
+    'Age': [20, None, 22, 21],
+    'Dept': ['CSE', 'IT', None, 'CSE']
+}
+df = pd.DataFrame(data)
+df.to_csv("input.csv", index=False)
+df = pd.read_csv("input.csv")
+df['Age'].fillna(df['Age'].mean(), inplace=True)
+df['Dept'].fillna(df['Dept'].mode()[0], inplace=True)
+df.to_csv("updated.csv", index=False)
+print(df)
+----
+
+
++*Out[1]:*+
+----
+     Name   Age Dept
+0   Meera  20.0  CSE
+1  Anjali  21.0   IT
+2  Vikram  22.0  CSE
+3   Rohit  21.0  CSE
+
+C:\Users\rames\AppData\Local\Temp\ipykernel_19676\2591229511.py:16: FutureWarning: A value is trying to be set on a copy of a DataFrame or Series through chained assignment using an inplace method.
+The behavior will change in pandas 3.0. This inplace method will never work because the intermediate object on which we are setting values always behaves as a copy.
+
+For example, when doing 'df[col].method(value, inplace=True)', try using 'df.method({col: value}, inplace=True)' or df[col] = df[col].method(value) instead, to perform the operation inplace on the original object.
+
+
+  df['Age'].fillna(df['Age'].mean(), inplace=True)
+C:\Users\rames\AppData\Local\Temp\ipykernel_19676\2591229511.py:17: FutureWarning: A value is trying to be set on a copy of a DataFrame or Series through chained assignment using an inplace method.
+The behavior will change in pandas 3.0. This inplace method will never work because the intermediate object on which we are setting values always behaves as a copy.
+
+For example, when doing 'df[col].method(value, inplace=True)', try using 'df.method({col: value}, inplace=True)' or df[col] = df[col].method(value) instead, to perform the operation inplace on the original object.
+
+
+  df['Dept'].fillna(df['Dept'].mode()[0], inplace=True)
+----
+
+
++*In[ ]:*+
+[source, ipython3]
+----
+
+----
